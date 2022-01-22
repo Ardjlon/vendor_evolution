@@ -15,7 +15,11 @@
 #
 
 # Bootanimation
-ifeq ($(TARGET_BOOT_ANIMATION_RES),1080)
+ifdef TARGET_CUSTOM_BOOTANIMATION
+    PRODUCT_COPY_FILES += \
+        $(TARGET_CUSTOM_BOOTANIMATION):$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
+    $(warning "Using $(TARGET_CUSTOM_BOOTANIMATION) as the Bootanimation ZIP.")
+else ifeq ($(TARGET_BOOT_ANIMATION_RES),1080)
      PRODUCT_COPY_FILES += vendor/evolution/bootanimation/bootanimation_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 else ifeq ($(TARGET_BOOT_ANIMATION_RES),1440)
      PRODUCT_COPY_FILES += vendor/evolution/bootanimation/bootanimation_1440.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
